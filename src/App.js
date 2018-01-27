@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {Button} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
 import './App.css';
 import Slider, {Range, createSliderWithTooltip} from 'rc-slider';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from "recharts";
@@ -45,6 +47,11 @@ class App extends Component {
 							% of discount
 							<SliderWithTooltip tipFormatter={percentFormatter}/>
 						</div>
+						<Link to="/report">
+							<Button bsSize="large" bsStyle="primary" style={{marginTop: 30}}>
+								Report Card
+							</Button>
+						</Link>
 					</div>
 				</div>
 			</div>

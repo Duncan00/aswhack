@@ -8,6 +8,8 @@ import ReportCard from './ReportCard';
 ReactDOM.render(
 	<BrowserRouter>
 		<div>
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
 			<Route path="/management" component={App}/>
 			<Route path="/report" component={ReportCard}/>
 		</div>
