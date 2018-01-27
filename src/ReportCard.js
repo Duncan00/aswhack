@@ -39,7 +39,7 @@ class ReportCard extends Component {
 				<p className="App-intro">
 
 				</p>
-				<div style={{display: 'flex', 'flex-direction': 'row', alignContent: 'center'}}>
+				<div style={{display: 'flex', 'flex-direction': 'row', alignItems: 'center'}}>
 					<LineChart width={400} height={300} data={data}
 							   margin={{top: 5, right: 30, left: 20, bottom: 5}}>
 						<XAxis dataKey="name"/>
