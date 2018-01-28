@@ -2,13 +2,24 @@ import React, {Component} from 'react';
 import {Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import './App.css';
-import Slider, {Range, createSliderWithTooltip} from 'rc-slider';
+import Slider, {createSliderWithTooltip} from 'rc-slider';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label} from "recharts";
 import 'rc-slider/assets/index.css';
+import DatePicker from 'react-date-picker';
+import 'react-datepicker/dist/react-datepicker.css';
+import moment from "moment";
 
 const SliderWithTooltip = createSliderWithTooltip(Slider);
 
 class App extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			startDate: moment()
+		};
+		this.handleChange = this.handleChange.bind(this);
+	}
+
 	render() {
 		const line_a_key = 'sum(SALES_AMOUNT)';
 		const line_b_key = 'sum(SALES_AMOUNT * SUCCESS_RATE)';
@@ -26,7 +37,7 @@ class App extends Component {
 				<header className="App-header">
 					<h1 className="App-title">Promo Management</h1>
 				</header>
-				<div style={{display: 'flex', 'flex-direction': 'row', paddingTop: 70}}>
+				<div style={{display: 'flex', flexDirection: 'row', paddingTop: 70}}>
 					<LineChart width={600} height={300} data={data}
 							   margin={{top: 5, right: 30, left: 20, bottom: 5}}>
 						<XAxis dataKey="name">
@@ -43,11 +54,21 @@ class App extends Component {
 					</LineChart>
 					<div style={{width: 500, margin: 50}}>
 						<div style={{marginTop: 30}}>
-							% of discount
+							Percentage of Discount (%)
 							<SliderWithTooltip tipFormatter={percentFormatter}/>
 						</div>
 						<div style={{paddingTop: 30}}>
-							Time Frame: <input type="date"/>
+							<p>Time Frame</p>
+							From:
+							<DatePicker
+								selected={this.state.startDate}
+								onChange={this.handleChange}
+							/>
+							To:
+							<DatePicker
+								selected={this.state.startDate}
+								onChange={this.handleChange}
+							/>
 						</div>
 						<Link to="/report">
 							<Button bsSize="large" bsStyle="primary" style={{marginTop: 30}}>
@@ -56,6 +77,8 @@ class App extends Component {
 						</Link>
 					</div>
 				</div>
+
+
 				<h1 className="App-title">External Factors</h1>
 				<div style={{display: 'flex', 'flex-direction': 'row', paddingTop: 100}}>
 					<LineChart width={400} height={300} data={data}
@@ -100,6 +123,12 @@ class App extends Component {
 				</div>
 			</div>
 		);
+	}
+
+	handleChange(date) {
+		this.setState({
+			startDate: moment(date)
+		});
 	}
 }
 
