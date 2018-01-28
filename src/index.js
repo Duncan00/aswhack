@@ -9,7 +9,7 @@ ReactDOM.render(
 	<BrowserRouter>
 		<div>
 			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
-			<Route path="/" exact render={() => (<Redirect to="/management"/>)}/>\
+			<Route path="/" exact render={() => (<Redirect to="/management"/>)}/>
 			<Route path="/management" component={App}/>
 			<Route path="/report" component={ReportCard}/>
 		</div>

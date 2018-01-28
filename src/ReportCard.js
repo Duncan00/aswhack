@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './App.css';
-import Slider, {Range} from 'rc-slider';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend} from "recharts";
 import 'rc-slider/assets/index.css';
 
@@ -30,16 +29,15 @@ class ReportCard extends Component {
 				<header className="App-header">
 					<h1 className="App-title">Report Card</h1>
 				</header>
-				<h1 className="App-title">CAMPAIGN SCORE</h1>
+				<h1 className="App-title">CAMPAIGN SCORE (0 - 1)</h1>
+				<h1 className="App-title">0.9</h1>
 				<p>
-
-					0.9
 					Revenue: <span style={{color:'green'}}>&#8593;</span> +3900
 				</p>
 				<p className="App-intro">
 
 				</p>
-				<div style={{display: 'flex', 'flex-direction': 'row', alignItems: 'center'}}>
+				<div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', margin: 'auto', paddingTop: 50}}>
 					<LineChart width={400} height={300} data={data}
 							   margin={{top: 5, right: 30, left: 20, bottom: 5}}>
 						<XAxis dataKey="name"/>
