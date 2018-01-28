@@ -2,11 +2,12 @@ import React, {Component} from 'react';
 import {Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import './App.css';
-import Slider, {createSliderWithTooltip} from 'rc-slider';
+import Slider, {Range, createSliderWithTooltip} from 'rc-slider';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label} from "recharts";
 import 'rc-slider/assets/index.css';
 import DatePicker from 'react-date-picker';
 import moment from "moment";
+
 
 const SliderWithTooltip = createSliderWithTooltip(Slider);
 
@@ -41,8 +42,8 @@ class App extends Component {
 				<header className="App-header">
 					<img style={{height: 120}} src="http://www.avenuek.com.my/file/2016/06/ws-logo1.jpg"/>
 				</header>
-				<h1 style={{fontSize: 36}} className="App-title">Promotion Management</h1>
-				<div style={{display: 'flex', flexDirection: 'row', paddingTop: 70}}>
+				<h1 style={{fontSize: 36}} className="App-title">Your Promotion Management Dashboard</h1>
+				<div style={{display: 'flex', 'flex-direction': 'row', 'justify-content': 'space-around', paddingTop: 70}}>
 					<LineChart width={600} height={300} data={data}
 							   margin={{top: 5, right: 30, left: 20, bottom: 5}}>
 						<XAxis dataKey="name">
@@ -90,8 +91,8 @@ class App extends Component {
 					</Button>
 				</Link>
 
-				<h1 style={{fontSize: 28}} className="App-title">External Factors</h1>
-				<div style={{display: 'flex', 'flex-direction': 'row', paddingTop: 50}}>
+				<h1 style={{fontSize: 28, paddingTop: 50}} className="App-title">External Factors</h1>
+				<div style={{display: 'flex', 'flex-direction': 'row', 'justify-content': 'space-around'}}>
 					<div>
 						<h1 style={{fontSize: 24}}>Google Trends</h1>
 						<LineChart width={400} height={300} data={data}
