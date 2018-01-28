@@ -14,7 +14,8 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			startDate: moment()
+			startDate: moment(),
+			percent: 90,
 		};
 		this.handleChange = this.handleChange.bind(this);
 	}
@@ -22,25 +23,29 @@ class App extends Component {
 	render() {
 		const line_a_key = 'sum(SALES_AMOUNT)';
 		const line_b_key = 'sum(SALES_AMOUNT * SUCCESS_RATE)';
+
+		const health_care_key = 'Health Care';
+		const medical_key = 'Medical';
+		const tempature_key = 'Tempature';
+		const flu_key = 'Flu';
+
 		const data = [
-			{name: 'Page A', [line_a_key]: 4000, [line_b_key]: 2400},
-			{name: 'Page B', [line_a_key]: 3000, [line_b_key]: 1398},
-			{name: 'Page C', [line_a_key]: 2000, [line_b_key]: 9800},
-			{name: 'Page D', [line_a_key]: 2780, [line_b_key]: 3908},
-			{name: 'Page E', [line_a_key]: 1890, [line_b_key]: 4800},
-			{name: 'Page F', [line_a_key]: 2390, [line_b_key]: 3800},
-			{name: 'Page G', [line_a_key]: 3490, [line_b_key]: 4300},
+			{name: '01/01/2018', [line_a_key]: 4000, [line_b_key]: 2400, [health_care_key]: 2400, [medical_key]: 2300, [tempature_key]: 15, [flu_key]: 1000},
+			{name: '01/02/2018', [line_a_key]: 3000, [line_b_key]: 1398, [health_care_key]: 2098, [medical_key]: 1998, [tempature_key]: 7, [flu_key]: 1398},
+			{name: '01/03/2018', [line_a_key]: 2000, [line_b_key]: 9800, [health_care_key]: 7800, [medical_key]: 6800, [tempature_key]: 15, [flu_key]: 900},
+			{name: '01/04/2018', [line_a_key]: 2780, [line_b_key]: 3908, [health_care_key]: 2908, [medical_key]: 2908, [tempature_key]: 20, [flu_key]: 700},
+			{name: '01/05/2018', [line_a_key]: 1890, [line_b_key]: 4800, [health_care_key]: 5400, [medical_key]: 5800, [tempature_key]: 23, [flu_key]: 400},
 		];
 		return (
 			<div className="App">
 				<header className="App-header">
-					<h1 className="App-title">Promo Management</h1>
+					<img style={{height: 120}} src="http://www.avenuek.com.my/file/2016/06/ws-logo1.jpg"/>
 				</header>
+				<h1 style={{fontSize: 36}} className="App-title">Promotion Management</h1>
 				<div style={{display: 'flex', flexDirection: 'row', paddingTop: 70}}>
 					<LineChart width={600} height={300} data={data}
 							   margin={{top: 5, right: 30, left: 20, bottom: 5}}>
 						<XAxis dataKey="name">
-							<Label value="Date" offset={0} position="insideBottom"/>
 						</XAxis>
 						<YAxis>
 							<Label value="Sales (USD)" offset={0} angle={-90} position="insideLeft"/>
@@ -48,77 +53,92 @@ class App extends Component {
 						<CartesianGrid strokeDasharray="3 3"/>
 						<Tooltip/>
 						<Legend/>
-						<Line type="monotone" dataKey={line_a_key} stroke="#8884d8" activeDot={{r: 8}}/>
+						<Line type="monotone" dataKey={line_a_key} stroke="#8884d8"/>
 						<Line type="monotone" dataKey={line_b_key} stroke="#82ca9d"/>
 					</LineChart>
 					<div style={{width: 500, margin: 50}}>
-						<div style={{marginTop: 30}}>
-							Percentage of Discount (%)
-							<SliderWithTooltip tipFormatter={percentFormatter}/>
+						<div style={{marginTop: 10}}>
+							Percentage of Discount ({this.state.percent}%)
+							<SliderWithTooltip onChange={(percent) => {
+								this.setState({
+									percent: percent
+								});
+							}} defaultValue={this.state.percent} tipFormatter={percentFormatter}/>
 						</div>
 						<div style={{paddingTop: 30}}>
 							<p>Time Frame</p>
-							From:
-							<DatePicker
-								selected={this.state.startDate}
-								onChange={this.handleChange}
-							/>
-							To:
-							<DatePicker
-								selected={this.state.startDate}
-								onChange={this.handleChange}
-							/>
+							<div style={{paddingTop: 30}}>
+								From:
+								<DatePicker
+									selected={this.state.startDate}
+									onChange={this.handleChange}
+								/>
+							</div>
+							<div style={{paddingTop: 30}}>
+								To:
+								<DatePicker
+									selected={this.state.startDate}
+									onChange={this.handleChange}
+								/>
+							</div>
 						</div>
-						<Link to="/report">
-							<Button bsSize="large" bsStyle="primary" style={{marginTop: 30}}>
-								Report Card
-							</Button>
-						</Link>
 					</div>
 				</div>
+				<Link to="/report">
+					<Button bsSize="large" bsStyle="primary" style={{marginTop: 30}}>
+						Report Card
+					</Button>
+				</Link>
 
+				<h1 style={{fontSize: 28}} className="App-title">External Factors</h1>
+				<div style={{display: 'flex', 'flex-direction': 'row', paddingTop: 50}}>
+					<div>
+						<h1 style={{fontSize: 24}}>Google Trends</h1>
+						<LineChart width={400} height={300} data={data}
+								   margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+							<XAxis dataKey="name">
+							</XAxis>
+							<YAxis>
+								<Label value="No. of Searches" offset={0} angle={-90} position="insideLeft"/>
+							</YAxis>
+							<CartesianGrid strokeDasharray="3 3"/>
+							<Tooltip/>
+							<Legend/>
+							<Line type="monotone" dataKey={health_care_key} stroke="#8884d8"/>
+							<Line type="monotone" dataKey={medical_key} stroke="#82ca9d"/>
+						</LineChart>
+					</div>
 
-				<h1 className="App-title">External Factors</h1>
-				<div style={{display: 'flex', 'flex-direction': 'row', paddingTop: 100}}>
-					<LineChart width={400} height={300} data={data}
-							   margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-						<XAxis dataKey="name">
-							<Label value="Date" offset={0} position="insideBottom"/>
-						</XAxis>
-						<YAxis>
-							<Label value="Sales (USD)" offset={0} angle={-90} position="insideLeft"/>
-						</YAxis>
-						<CartesianGrid strokeDasharray="3 3"/>
-						<Tooltip/>
-						<Legend/>
-						<Line type="monotone" dataKey={line_a_key} stroke="#8884d8" activeDot={{r: 8}}/>
-					</LineChart>
-					<LineChart width={400} height={300} data={data}
-							   margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-						<XAxis dataKey="name">
-							<Label value="Date" offset={0} position="insideBottom"/>
-						</XAxis>
-						<YAxis>
-							<Label value="Sales (USD)" offset={0} angle={-90} position="insideLeft"/>
-						</YAxis>
-						<CartesianGrid strokeDasharray="3 3"/>
-						<Tooltip/>
-						<Legend/>
-						<Line type="monotone" dataKey={line_a_key} stroke="#8884d8" activeDot={{r: 8}}/>
-					</LineChart>
-					<LineChart width={400} height={300} data={data}
-							   margin={{top: 5, right: 30, left: 20, bottom: 5}}>
-						<XAxis dataKey="name">
-							<Label value="Date" offset={0} position="insideBottom"/>
-						</XAxis>
-						<YAxis>
-							<Label value="Sales (USD)" offset={0} angle={-90} position="insideLeft"/>
-						</YAxis>
-						<CartesianGrid strokeDasharray="3 3"/>
-						<Tooltip/>
-						<Legend/>
-						<Line type="monotone" dataKey={line_a_key} stroke="#8884d8" activeDot={{r: 8}}/>
-					</LineChart>
+					<div>
+						<h1 style={{fontSize: 24}}>Tempature</h1>
+						<LineChart width={400} height={300} data={data}
+								   margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+							<XAxis dataKey="name">
+							</XAxis>
+							<YAxis>
+								<Label value="Temperature" offset={0} angle={-90} position="insideLeft"/>
+							</YAxis>
+							<CartesianGrid strokeDasharray="3 3"/>
+							<Tooltip/>
+							<Legend/>
+							<Line type="monotone" dataKey={tempature_key} stroke="#8884d8"/>
+						</LineChart>
+					</div>
+					<div>
+						<h1 style={{fontSize: 24}}>Flu Season</h1>
+						<LineChart width={400} height={300} data={data}
+								   margin={{top: 5, right: 30, left: 20, bottom: 5}}>
+							<XAxis dataKey="name">
+							</XAxis>
+							<YAxis>
+								<Label value="No. of flu" offset={0} angle={-90} position="insideLeft"/>
+							</YAxis>
+							<CartesianGrid strokeDasharray="3 3"/>
+							<Tooltip/>
+							<Legend/>
+							<Line type="monotone" dataKey={flu_key} stroke="#8884d8"/>
+						</LineChart>
+					</div>
 				</div>
 			</div>
 		);

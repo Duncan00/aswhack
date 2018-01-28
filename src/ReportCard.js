@@ -27,9 +27,10 @@ class ReportCard extends Component {
 		return (
 			<div className="App">
 				<header className="App-header">
-					<h1 className="App-title">Report Card</h1>
+					<img style={{height: 120}} src="http://www.avenuek.com.my/file/2016/06/ws-logo1.jpg"/>
 				</header>
-				<h1 className="App-title">CAMPAIGN SCORE (0 - 1)</h1>
+				<h1 style={{fontSize: 36}} className="App-title">Report Card</h1>
+				<h1 style={{paddingTop: 36}} className="App-title">CAMPAIGN SCORE (0 - 1)</h1>
 				<h1 className="App-title">0.9</h1>
 				<p>
 					Revenue: <span style={{color: 'green'}}>&#8593;</span> +3900
