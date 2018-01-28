@@ -6,7 +6,6 @@ import Slider, {createSliderWithTooltip} from 'rc-slider';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label} from "recharts";
 import 'rc-slider/assets/index.css';
 import DatePicker from 'react-date-picker';
-import 'react-datepicker/dist/react-datepicker.css';
 import moment from "moment";
 
 const SliderWithTooltip = createSliderWithTooltip(Slider);
