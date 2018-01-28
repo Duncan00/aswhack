@@ -135,7 +135,7 @@ class App extends Component {
 				</div>
 				<Link to="/report">
 					<Button bsSize="large" bsStyle="primary" style={{marginTop: 30}}>
-						Report Card
+						AB Testing Report Card
 					</Button>
 				</Link>
 
