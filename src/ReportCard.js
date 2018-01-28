@@ -31,14 +31,12 @@ class ReportCard extends Component {
 				</header>
 				<h1 style={{fontSize: 36}} className="App-title">Report Card</h1>
 				<h1 style={{paddingTop: 36}} className="App-title">CAMPAIGN SCORE (0 - 1)</h1>
-				<h1 className="App-title">0.9</h1>
-				<p>
+				<h1 style={{fontSize: 48}} className="App-title">0.9</h1>
+				<p style={{fontSize: 24}}>
 					Revenue: <span style={{color:'green'}}>&#8593;</span> +3900
 				</p>
-				<p className="App-intro">
-
-				</p>
 				<div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', margin: 'auto', paddingTop: 50}}>
+					<div style={{flexGrow: 1}}/>
 					<LineChart width={400} height={300} data={data}
 							   margin={{top: 5, right: 30, left: 20, bottom: 5}}>
 						<XAxis dataKey="name"/>
@@ -57,6 +55,7 @@ class ReportCard extends Component {
 						<Legend/>
 						<Line type="monotone" dataKey="Test" stroke="#82ca9d"/>
 					</LineChart>
+					<div style={{flexGrow: 1}}/>
 				</div>
 			</div>
 		);
